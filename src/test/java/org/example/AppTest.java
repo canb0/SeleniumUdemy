@@ -1,14 +1,20 @@
 package org.example;
 
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
 
 
 public class AppTest{
@@ -18,10 +24,11 @@ public class AppTest{
     public WebDriver driver;
     //Declare a test URL variable
     public String testURL;//= "http://www.swtestacademy.com/";
+    public String testiniumKey =  System.getenv("USERNAME") + ":"+ System.getenv("ACCESS_KEY") ;
     public String browser;
 
     @BeforeMethod
-    public void setupTest (){
+    public void setupTest () throws MalformedURLException {
         browser = System.getProperty("browser");
         testURL = System.getProperty("url");
 
@@ -38,6 +45,11 @@ public class AppTest{
             options.addArguments("--headless");
             driver = new FirefoxDriver(options);
         }else if (browser.contains("CloudChrome")){
+            MutableCapabilities capabilities = new MutableCapabilities();
+            capabilities.setCapability("browserName", "Chrome");
+            capabilities.setCapability("version", "latest");
+            capabilities.setCapability("key", testiniumKey);
+            driver = new RemoteWebDriver(new URL("http://hub.testinium.io/wd/hub"), capabilities);
         }
     }
     //-----------------------------------Tests-----------------------------------
