@@ -1,4 +1,4 @@
-name: Selenium Tests with Maven
+name: Nightly Selenium Tests with Maven
 
 on:
   schedule:
