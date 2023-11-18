@@ -33,6 +33,7 @@ public class AppTest{
         testURL = System.getProperty("url");
 
 
+        System.out.println("TestiniumKey is"+testiniumKey);
         //Print console that code is in @BeforeMethod!
         System.out.println("@BeforeMethod has started.");
 
