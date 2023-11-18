@@ -1,0 +1,7 @@
+name: 'Checkout Project'
+runs:
+  using: "composite"
+  steps:
+    # Setup
+    - name: Checkout code
+      uses: actions/checkout@v4.1.1

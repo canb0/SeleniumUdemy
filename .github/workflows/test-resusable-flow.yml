@@ -1,0 +1,35 @@
+name: Selenium Tests with Maven
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        type: choice
+        required: true
+        description: What browser should be used for the test?
+        default: Chrome
+        options:
+          - Chrome
+          - Firefox
+      url:
+        required: true
+        description: What url will be used?
+        default: 'http://www.swtestacademy.com'
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: ./.github/reusableFlows/checkout
+
+      - name: Setup Java
+        uses: ./.github/reusableFlows/setup
+
+      - name: Build and test with Maven
+        run: mvn -B clean test -Dbrowser=${{github.event.inputs.browser}} -Durl=${{github.event.inputs.url}}
+
+      - name: Archieve Reports
+        uses: ./.github/reusableFlows/archiveResult

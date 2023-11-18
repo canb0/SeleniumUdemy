@@ -1,0 +1,11 @@
+name: 'Archieve Test Results'
+runs:
+  using: "composite"
+  steps:
+    # Setup
+    - name: Archive test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: target/surefire-reports
+
