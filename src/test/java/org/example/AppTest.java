@@ -3,11 +3,12 @@ package org.example;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 
 public class AppTest{
@@ -24,6 +25,7 @@ public class AppTest{
         browser = System.getProperty("browser");
         testURL = System.getProperty("url");
 
+
         //Print console that code is in @BeforeMethod!
         System.out.println("@BeforeMethod has started.");
 
@@ -35,6 +37,7 @@ public class AppTest{
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--headless");
             driver = new FirefoxDriver(options);
+        }else if (browser.contains("CloudChrome")){
         }
     }
     //-----------------------------------Tests-----------------------------------
