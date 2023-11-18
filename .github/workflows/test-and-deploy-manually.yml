@@ -11,10 +11,10 @@ on:
         options:
           - Chrome
           - Firefox
-    url:
-      required: true
-      description: What url will be used?
-      default: 'http://www.swtestacademy.com'
+      url:
+        required: true
+        description: What url will be used?
+        default: 'http://www.swtestacademy.com'
 
 jobs:
   build-and-test:
