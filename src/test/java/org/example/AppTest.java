@@ -4,17 +4,16 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 
 public class AppTest{
@@ -31,7 +30,6 @@ public class AppTest{
     public void setupTest () throws MalformedURLException {
         browser = System.getProperty("browser");
         testURL = System.getProperty("url");
-
 
         System.out.println("TestiniumKey is"+testiniumKey);
         //Print console that code is in @BeforeMethod!
