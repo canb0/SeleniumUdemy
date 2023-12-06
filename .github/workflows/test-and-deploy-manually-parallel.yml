@@ -27,5 +27,17 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install firefox -y
+
+      - name: Download and set up GeckoDriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+          tar -xzf geckodriver-v0.30.0-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          geckodriver --version
+
       - name: Build and test with Maven
         run: mvn -B clean test -Dbrowser=${{ matrix.browser }} -Durl=${{github.event.inputs.url}}
