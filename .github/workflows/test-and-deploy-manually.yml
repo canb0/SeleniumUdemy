@@ -1,4 +1,4 @@
-name: Selenium Tests with Maven
+name: Selenium Tests with Maven Manually
 
 on:
   workflow_dispatch:

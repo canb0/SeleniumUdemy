@@ -1,4 +1,4 @@
-name: Nightly Selenium Tests with Maven
+name: Nightly Selenium Tests with Maven for PR
 
 on:
   pull_request:
