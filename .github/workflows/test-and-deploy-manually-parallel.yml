@@ -1,16 +1,8 @@
-name: Cloud Selenium Tests with Maven
+name: Selenium Tests with Maven
 
 on:
   workflow_dispatch:
     inputs:
-      browser:
-        type: choice
-        required: true
-        description: What browser should be used for the test?
-        default: CloudChrome
-        options:
-          - CloudChrome
-
       url:
         required: true
         description: What url will be used?
@@ -20,6 +12,10 @@ jobs:
   build-and-test:
 
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [ Chrome, Firefox ]
 
     steps:
       - name: Checkout code
@@ -32,10 +28,7 @@ jobs:
           java-version: '17'
 
       - name: Build and test with Maven
-        env:
-          USERNAME: ${{ secrets.USERNAME }}
-          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-        run: mvn -B clean test -Dbrowser=CloudChrome -Durl=${{github.event.inputs.url}}
+        run: mvn -B clean test -Dbrowser=${{ matrix.browser }} -Durl=${{github.event.inputs.url}}
 
       - name: Archive test results
         uses: actions/upload-artifact@v2
