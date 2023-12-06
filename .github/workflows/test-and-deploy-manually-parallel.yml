@@ -29,9 +29,3 @@ jobs:
 
       - name: Build and test with Maven
         run: mvn -B clean test -Dbrowser=${{ matrix.browser }} -Durl=${{github.event.inputs.url}}
-
-      - name: Archive test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: target/surefire-reports

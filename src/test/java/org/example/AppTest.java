@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -36,10 +36,12 @@ public class AppTest{
         System.out.println("@BeforeMethod has started.");
 
         if(browser.contains("Chrome")){
+            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless=new");
             driver = new ChromeDriver(options);
         }else if (browser.contains("FireFox")) {
+            WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--headless");
             driver = new FirefoxDriver(options);
@@ -62,11 +64,7 @@ public class AppTest{
         //Print page's title
         System.out.println("Page Title: " + title);
         Assert.assertTrue(title.contains("Academy"));
-    }
-
-    @AfterMethod
-    public void teardownTest (){
-        System.out.println("@AfterMethod has started.");
         driver.quit();
     }
+
 }
